@@ -5,35 +5,77 @@
 },{}],3:[function(require,module,exports){
 !function(t,i){"object"==typeof exports&&"undefined"!=typeof module?module.exports=i():"function"==typeof define&&define.amd?define(i):(t="undefined"!=typeof globalThis?globalThis:t||self).dayjs_plugin_utc=i()}(this,(function(){"use strict";var t="minute",i=/[+-]\d\d(?::?\d\d)?/g,e=/([+-]|\d\d)/g;return function(s,f,n){var u=f.prototype;n.utc=function(t){var i={date:t,utc:!0,args:arguments};return new f(i)},u.utc=function(i){var e=n(this.toDate(),{locale:this.$L,utc:!0});return i?e.add(this.utcOffset(),t):e},u.local=function(){return n(this.toDate(),{locale:this.$L,utc:!1})};var o=u.parse;u.parse=function(t){t.utc&&(this.$u=!0),this.$utils().u(t.$offset)||(this.$offset=t.$offset),o.call(this,t)};var r=u.init;u.init=function(){if(this.$u){var t=this.$d;this.$y=t.getUTCFullYear(),this.$M=t.getUTCMonth(),this.$D=t.getUTCDate(),this.$W=t.getUTCDay(),this.$H=t.getUTCHours(),this.$m=t.getUTCMinutes(),this.$s=t.getUTCSeconds(),this.$ms=t.getUTCMilliseconds()}else r.call(this)};var a=u.utcOffset;u.utcOffset=function(s,f){var n=this.$utils().u;if(n(s))return this.$u?0:n(this.$offset)?a.call(this):this.$offset;if("string"==typeof s&&(s=function(t){void 0===t&&(t="");var s=t.match(i);if(!s)return null;var f=(""+s[0]).match(e)||["-",0,0],n=f[0],u=60*+f[1]+ +f[2];return 0===u?0:"+"===n?u:-u}(s),null===s))return this;var u=Math.abs(s)<=16?60*s:s,o=this;if(f)return o.$offset=u,o.$u=0===s,o;if(0!==s){var r=this.$u?this.toDate().getTimezoneOffset():-1*this.utcOffset();(o=this.local().add(u+r,t)).$offset=u,o.$x.$localOffset=r}else o=this.utc();return o};var h=u.format;u.format=function(t){var i=t||(this.$u?"YYYY-MM-DDTHH:mm:ss[Z]":"");return h.call(this,i)},u.valueOf=function(){var t=this.$utils().u(this.$offset)?0:this.$offset+(this.$x.$localOffset||this.$d.getTimezoneOffset());return this.$d.valueOf()-6e4*t},u.isUTC=function(){return!!this.$u},u.toISOString=function(){return this.toDate().toISOString()},u.toString=function(){return this.toDate().toUTCString()};var l=u.toDate;u.toDate=function(t){return"s"===t&&this.$offset?n(this.format("YYYY-MM-DD HH:mm:ss:SSS")).toDate():l.call(this)};var c=u.diff;u.diff=function(t,i,e){if(t&&this.$u===t.$u)return c.call(this,t,i,e);var s=this.local(),f=n(t).local();return c.call(s,f,i,e)}}}));
 },{}],4:[function(require,module,exports){
-var dayjs = require('dayjs')
-var utc = require("dayjs/plugin/utc");
-var timezone = require("dayjs/plugin/timezone");
+const dayjs = require('dayjs')
+const utc = require("dayjs/plugin/utc");
+const timezone = require("dayjs/plugin/timezone");
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
-dayjs.tz.guess()
-console.log(dayjs.tz.guess())
-
-var time = dayjs().format('hh:mm:ss')
-var data = dayjs().format('ddd, MMM D, YYYY')
 
 
-var data = document.getElementById('date');
-data.innerHTML = dayjs().format('ddd, MMM D, YYYY')
+let selectedZone = dayjs.tz.guess()
 
 
+console.log(selectedZone)
+
+
+//buscando elementos do HTML que serão atualizados.
+let data = document.getElementById('date');
+let horas = document.getElementById('time');
 var local = document.getElementById('location')
-local.innerHTML = dayjs.tz.guess()
+
+formatted = selectedZone.replace('_', ' ').replace('/', ' / ');
+local.innerHTML = formatted;
+displayCurrentTime();
 
 
 setInterval(displayCurrentTime , 1000);
 
-function displayCurrentTime () {
-    var time = dayjs().format('HH:mm:ss');
-    var horas = document.getElementById('time');
+function displayCurrentTime() {
+    let time = dayjs().tz(selectedZone).format('HH:mm:ss');
     
-    horas.innerHTML = time;  // Atribuindo o valor diretamente à propriedade innerHTML
+    data.innerHTML = dayjs().tz(selectedZone).format('ddd, MMM D, YYYY')
+    horas.innerHTML = time;  
     
+
     console.log(time);
+    console.log(selectedZone)
+
+    
 }
+
+
+
+const timezones = [
+    'America/Sao_Paulo',
+    'Europe/London',
+    'Asia/Tokyo',
+    'America/New_York',
+    'Australia/Sydney',
+    'Europe/Paris',
+    'Asia/Kolkata',
+    'Africa/Nairobi',
+    'Asia/Dubai'
+];
+
+const timezoneSelect = document.getElementById('timezone');
+
+timezones.forEach(zone => {
+    const option = document.createElement('option');
+    option.value = zone;
+    option.innerText = zone.replace('_', ' ').replace('/', ' / ');
+    timezoneSelect.appendChild(option);
+  });
+
+
+  function updateTime() {
+    selectedZone = timezoneSelect.value;
+    formatted = selectedZone.replace('_', ' ').replace('/', ' / ');
+    local.innerHTML = formatted;
+    displayCurrentTime();
+   
+  }
+
+
+  timezoneSelect.addEventListener('change', updateTime);
 },{"dayjs":1,"dayjs/plugin/timezone":2,"dayjs/plugin/utc":3}]},{},[4]);

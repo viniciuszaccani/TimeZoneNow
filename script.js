@@ -1,31 +1,75 @@
-var dayjs = require('dayjs')
-var utc = require("dayjs/plugin/utc");
-var timezone = require("dayjs/plugin/timezone");
+const dayjs = require('dayjs')
+const utc = require("dayjs/plugin/utc");
+const timezone = require("dayjs/plugin/timezone");
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
-dayjs.tz.guess()
-console.log(dayjs.tz.guess())
-
-var time = dayjs().format('hh:mm:ss')
-var data = dayjs().format('ddd, MMM D, YYYY')
 
 
-var data = document.getElementById('date');
-data.innerHTML = dayjs().format('ddd, MMM D, YYYY')
+let selectedZone = dayjs.tz.guess()
 
 
+console.log(selectedZone)
+
+
+//buscando elementos do HTML que serão atualizados.
+let data = document.getElementById('date');
+let horas = document.getElementById('time');
 var local = document.getElementById('location')
-local.innerHTML = dayjs.tz.guess()
 
 
+formatted = selectedZone.replace('_', ' ').replace('/', ' / ');
+local.innerHTML = formatted;
+displayCurrentTime();
+
+//atualiza o dia e a hora a cada segundo
 setInterval(displayCurrentTime , 1000);
 
-function displayCurrentTime () {
-    var time = dayjs().format('HH:mm:ss');
-    var horas = document.getElementById('time');
+function displayCurrentTime() {
+    let time = dayjs().tz(selectedZone).format('HH:mm:ss');
     
-    horas.innerHTML = time;  // Atribuindo o valor diretamente à propriedade innerHTML
+    data.innerHTML = dayjs().tz(selectedZone).format('ddd, MMM D, YYYY')
+    horas.innerHTML = time;  
     
+
     console.log(time);
+    console.log(selectedZone)
+
+    
 }
+
+
+
+const timezones = [
+    'America/Sao_Paulo',
+    'Europe/London',
+    'Asia/Tokyo',
+    'America/New_York',
+    'Australia/Sydney',
+    'Europe/Paris',
+    'Asia/Kolkata',
+    'Africa/Nairobi',
+    'Asia/Dubai'
+];
+
+const timezoneSelect = document.getElementById('timezone');
+
+timezones.forEach(zone => {
+    const option = document.createElement('option');
+    option.value = zone;
+    option.innerText = zone.replace('_', ' ').replace('/', ' / ');
+    timezoneSelect.appendChild(option);
+  });
+
+
+  //função chamada sempre que o usuário alterar o fuso horário escolhido
+  function updateTime() {
+    selectedZone = timezoneSelect.value;
+    formatted = selectedZone.replace('_', ' ').replace('/', ' / ');
+    local.innerHTML = formatted;
+    displayCurrentTime();
+   
+  }
+
+
+  timezoneSelect.addEventListener('change', updateTime);
