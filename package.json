@@ -17,6 +17,8 @@
   "homepage": "https://github.com/viniciuszaccani/TimeZoneNow#readme",
   "description": "",
   "dependencies": {
-    "dayjs": "^1.11.13"
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "dayjs": "^1.11.13",
+    "micromodal": "^0.4.10"
   }
 }

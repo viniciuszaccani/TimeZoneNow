@@ -2,6 +2,20 @@ const dayjs = require('dayjs')
 const utc = require("dayjs/plugin/utc");
 const timezone = require("dayjs/plugin/timezone");
 
+const MicroModal = require('micromodal');
+MicroModal.init({
+  onClose: (modal) => {
+    if (modal.id === 'modal-1') {
+      updateTime();
+    }
+  }
+});
+
+
+
+
+
+
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
@@ -18,7 +32,7 @@ let horas = document.getElementById('time');
 var local = document.getElementById('location')
 
 
-formatted = selectedZone.replace('_', ' ').replace('/', ' / ');
+let formatted = selectedZone.replace('_', ' ').replace('/', ' / ');
 local.innerHTML = formatted;
 displayCurrentTime();
 
@@ -72,4 +86,4 @@ timezones.forEach(zone => {
   }
 
 
-  timezoneSelect.addEventListener('change', updateTime);
+timezoneSelect.addEventListener('change', updateTime);

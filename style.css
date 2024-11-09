@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,700&display=swap');
+
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+    background-color: rgb(250, 249, 246);
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  
+main{
+    width: 600px;
+    text-align: end;
+}
+
+#time{
+    font-weight: 700;
+    font-style: italic;
+    font-size: 150px;
+    margin: 0px;
+}
+
+#date{
+    margin: 0px;
+}
+
+#location{
+    margin: 0px;
+    font-size: 30px;
+}
+
+.div-location{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+
+
+.modal {
+    display: none;
+  }
+  .modal[aria-hidden="false"] {
+    display: block;
+  }
+  .modal_overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal_container {
+    background: #fff;
+    padding: 1em;
+    max-width: 500px;
+    width: 100%; 
+    margin: 1em; 
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 3px solid black;
+  }
+
+
+  .modal_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .modal_title{
+    margin-bottom: 10px;
+    margin-top: 0px;
+  }
+
+
+  #timezone{
+    width: 300px;
+    height: 40px;
+    font-size: medium;
+    border-radius: 3px;
+    border: 2px solid;
+
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .modal_close-text{
+    padding-left: 10px;
+    font-size: larger;
+    font-weight: bold;
+  }
+
+  .modal_content{
+    text-align: left;
+
+  }
+
+  .icon{
+    border: none;
+    font-size: 25px;
+  }
