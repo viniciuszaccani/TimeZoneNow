@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
 
 
-    <title>Document</title>
+  <title>Document</title>
 </head>
+
 <body>
-    <main>
-        <div class="div-location">
-            <p id="location">America / Sao Paulo</p>
-            <a class="icon" data-micromodal-trigger="modal-1"><i class="fa-solid fa-pen-to-square"></i></a>
-            
-        </div>
-        <h1 id="time">00:00:00</h1>
-        <h2 id="date">Fri, Jan 1, 2000</h2>
-    </main>
+  <main>
+    <div class="div-location">
+      <p id="location">America / Sao Paulo</p>
+      <a class="icon" data-micromodal-trigger="modal-1"><i class="fa-solid fa-pen-to-square"></i></a>
+
+    </div>
+    <h1 id="time">00:00:00</h1>
+    <h2 id="date">Fri, Jan 1, 2000</h2>
+  </main>
 
 
-    
-<!--Modal-->
-<div id="modal-1" aria-hidden="true" class="modal">
+
+  <!--Modal-->
+  <div id="modal-1" aria-hidden="true" class="modal">
     <div tabindex="-1" data-micromodal-close class="modal_overlay">
       <div role="dialog" class="modal_container">
         <header class="modal_header">
           <h2 class="modal_title">Change timezone</h2>
-          <a class="icon" class="modal_close" aria-label="Fechar modal" data-micromodal-close><i class="fa-solid fa-x"></i></a>
-          
+          <a class="icon" class="modal_close" aria-label="Fechar modal" data-micromodal-close><i
+              class="fa-solid fa-x"></i></a>
+
         </header>
         <div class="modal_content">
-            <select id="timezone">
+          <select id="timezone">
             <!--Lista será incluida aqui-->
-            </select>
-            <a class="modal_close-text" data-micromodal-close>apply</a>
+          </select>
+          <a class="modal_close-text" data-micromodal-close>apply</a>
         </div>
       </div>
     </div>
   </div>
-          
 
-    <script src="bundle.js"></script>
+
+  <script src="bundle.js"></script>
 </body>
+
 </html>
