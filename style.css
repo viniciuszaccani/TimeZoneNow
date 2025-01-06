@@ -39,7 +39,7 @@ main {
 .div-location {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
   gap: 10px;
 }
 
@@ -111,9 +111,4 @@ main {
 .modal_content {
   text-align: left;
 
-}
-
-.icon {
-  border: none;
-  font-size: 25px;
 }
